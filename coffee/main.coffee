@@ -27,10 +27,11 @@ create_paddle = (game) ->
 
 create_ball = (game) ->
   ball = game.add.sprite(game.width / 2, 450, 'ball')
-  ball.anchor.set(0.5)
   game.physics.enable(ball, Phaser.Physics.ARCADE)
+  ball.anchor.set(0.5)
   ball.body.velocity.x = 20
   ball.body.velocity.y = -200
+  ball.body.collideWorldBounds = true
   ball.body.bounce.set(1)
   return ball
 
@@ -59,6 +60,7 @@ create = ->
   Breakout.paddle = create_paddle(game)
   Breakout.ball = create_ball(game)
 
+  game.physics.arcade.checkCollision.down = false
 
 
 # Globals:
