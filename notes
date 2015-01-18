@@ -1,0 +1,12 @@
+
+
+- Scaffolding:
+  - bower.json skeleton file with dependencies.
+    bower install to get phaser, any other deps.
+  - serve file to compile all coffeescript from coffee/ to build/main.js
+  - skeleton index.html to load deps, plus main.js
+    Not generating includes or using requirejs at this point.  Too heavyweight.
+
+
+- Images:
+  - ImageMagick convert.
