@@ -12,15 +12,17 @@ create_bricks = (game) ->
 
   for i in [1..10]
     for j in [1..5]
-      bricks.create(origin[0] + stepsize[0] * i,
-                    origin[1] + stepsize[1] * j,
-                    'block')
+      brick = bricks.create(origin[0] + stepsize[0] * i,
+                            origin[1] + stepsize[1] * j,
+                            'block')
+      brick.body.immovable = true
   return bricks
 
 create_paddle = (game) ->
   paddle = game.add.sprite(game.width / 2, 500, 'paddle')
   paddle.anchor.set(0.5)
   game.physics.enable(paddle, Phaser.Physics.ARCADE)
+  paddle.body.immovable = true
   return paddle
 
 create_ball = (game) ->
@@ -29,6 +31,7 @@ create_ball = (game) ->
   game.physics.enable(ball, Phaser.Physics.ARCADE)
   ball.body.velocity.x = 20
   ball.body.velocity.y = -100
+  ball.body.bounce.set(1)
   return ball
 
 
@@ -40,6 +43,10 @@ preload = ->
 
 update = ->
   Breakout.paddle.x = Breakout.game.input.x
+
+  # Trigger collisions.
+  Breakout.game.physics.arcade.collide(Breakout.ball, Breakout.bricks)
+  Breakout.game.physics.arcade.collide(Breakout.ball, Breakout.paddle)
 
 
 create = ->
