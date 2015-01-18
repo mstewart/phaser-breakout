@@ -10,3 +10,8 @@
 
 - Images:
   - ImageMagick convert.
+    E.g. to convert gif -> png, and resize:
+    $ convert block.gif -resize 20% block.png
+
+    Or with explicit pixel size:
+    $ convert block.gif -resize 30x30 block.png
