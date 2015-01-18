@@ -47,10 +47,22 @@ update = ->
 
   brick_collision = (ball, brick) ->
     brick.kill()
+  paddle_collision = (ball, paddle) ->
+    # Adjust ball x velocity depending on closeness to paddle midpoint when rebounding.
+    x_delta = ball.x - paddle.x
+    velocity = ball.body.velocity.x + x_delta * 5
+
+    # Limit it to some max speed.
+    max_speed = 300
+    velocity = Math.min(max_speed, velocity)
+    velocity = Math.max(-1 * max_speed, velocity)
+
+    ball.body.velocity.x = velocity
+
 
   # Trigger collisions.
   Breakout.game.physics.arcade.collide(Breakout.ball, Breakout.bricks, brick_collision)
-  Breakout.game.physics.arcade.collide(Breakout.ball, Breakout.paddle)
+  Breakout.game.physics.arcade.collide(Breakout.ball, Breakout.paddle, paddle_collision)
 
 
 create = ->

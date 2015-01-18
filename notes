@@ -8,6 +8,16 @@
     Not generating includes or using requirejs at this point.  Too heavyweight.
 
 
+
+- Phaser Arcade physics:
+  - Basic collision, bouncing is available without having to write special bounce handlers.
+    Just register them all as arcade physics bodies, and call Arcade.collide() with the objects/groups
+    on every update iteration (even with blank onCollision callback).
+  - The onCollision callback is an optional *post-processing* which runs after a collision.
+    Importantly, this is after all the physics bouncing has been applied.
+    So you can override anything that happened there.
+
+
 - Images:
   - ImageMagick convert.
     E.g. to convert gif -> png, and resize:
