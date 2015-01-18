@@ -1,4 +1,6 @@
 
+Y_SPEED = 200
+MAX_X_SPEED = 300
 
 this.Breakout = {}
 
@@ -30,7 +32,7 @@ create_ball = (game) ->
   game.physics.enable(ball, Phaser.Physics.ARCADE)
   ball.anchor.set(0.5)
   ball.body.velocity.x = 20
-  ball.body.velocity.y = -200
+  ball.body.velocity.y = -1 * Y_SPEED
   ball.body.collideWorldBounds = true
   ball.body.bounce.set(1)
   return ball
@@ -53,9 +55,8 @@ update = ->
     velocity = ball.body.velocity.x + x_delta * 5
 
     # Limit it to some max speed.
-    max_speed = 300
-    velocity = Math.min(max_speed, velocity)
-    velocity = Math.max(-1 * max_speed, velocity)
+    velocity = Math.min(MAX_X_SPEED, velocity)
+    velocity = Math.max(-1 * MAX_X_SPEED, velocity)
 
     ball.body.velocity.x = velocity
 
