@@ -30,7 +30,7 @@ create_ball = (game) ->
   ball.anchor.set(0.5)
   game.physics.enable(ball, Phaser.Physics.ARCADE)
   ball.body.velocity.x = 20
-  ball.body.velocity.y = -100
+  ball.body.velocity.y = -200
   ball.body.bounce.set(1)
   return ball
 
@@ -44,8 +44,11 @@ preload = ->
 update = ->
   Breakout.paddle.x = Breakout.game.input.x
 
+  brick_collision = (ball, brick) ->
+    brick.kill()
+
   # Trigger collisions.
-  Breakout.game.physics.arcade.collide(Breakout.ball, Breakout.bricks)
+  Breakout.game.physics.arcade.collide(Breakout.ball, Breakout.bricks, brick_collision)
   Breakout.game.physics.arcade.collide(Breakout.ball, Breakout.paddle)
 
 
