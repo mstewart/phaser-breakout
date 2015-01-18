@@ -1,6 +1,6 @@
 
 
-Breakout = {}
+this.Breakout = {}
 
 create_bricks = (game) ->
   bricks = game.add.group()
@@ -18,16 +18,24 @@ create_bricks = (game) ->
   return bricks
 
 create_paddle = (game) ->
-  paddle = game.add.sprite(100, 500, 'paddle')
+  paddle = game.add.sprite(game.width / 2, 500, 'paddle')
   paddle.anchor.set(0.5)
+  game.physics.enable(paddle, Phaser.Physics.ARCADE)
   return paddle
 
+create_ball = (game) ->
+  ball = game.add.sprite(game.width / 2, 450, 'ball')
+  ball.anchor.set(0.5)
+  game.physics.enable(ball, Phaser.Physics.ARCADE)
+  ball.body.velocity.x = 20
+  ball.body.velocity.y = -100
+  return ball
 
 
 preload = ->
-  game = Breakout.game
-  game.load.image('block', 'assets/block.png')
-  game.load.image('paddle', 'assets/paddle.png')
+  images = ['block', 'paddle', 'ball']
+  for key in images
+    Breakout.game.load.image(key, 'assets/' + key + '.png')
  
 
 update = ->
@@ -39,6 +47,7 @@ create = ->
   game.physics.startSystem(Phaser.Physics.ARCADE)
   Breakout.bricks = create_bricks(game)
   Breakout.paddle = create_paddle(game)
+  Breakout.ball = create_ball(game)
 
 
 
